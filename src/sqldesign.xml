@@ -1,0 +1,540 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- SQL XML created by WWW SQL Designer, https://github.com/ondras/wwwsqldesigner/ -->
+<!-- Active URL: http://localhost:8088/ -->
+<sql>
+<datatypes db="mysql">
+	<group label="Numeric" color="rgb(238,238,170)">
+		<type label="Integer" length="0" sql="INTEGER" quote=""/>
+	 	<type label="TINYINT" length="0" sql="TINYINT" quote=""/>
+	 	<type label="SMALLINT" length="0" sql="SMALLINT" quote=""/>
+	 	<type label="MEDIUMINT" length="0" sql="MEDIUMINT" quote=""/>
+	 	<type label="INT" length="0" sql="INT" quote=""/>
+		<type label="BIGINT" length="0" sql="BIGINT" quote=""/>
+		<type label="Decimal" length="1" sql="DECIMAL" re="DEC" quote=""/>
+		<type label="Single precision" length="0" sql="FLOAT" quote=""/>
+		<type label="Double precision" length="0" sql="DOUBLE" re="DOUBLE" quote=""/>
+	</group>
+
+	<group label="Character" color="rgb(255,200,200)">
+		<type label="Char" length="1" sql="CHAR" quote="'"/>
+		<type label="Varchar" length="1" sql="VARCHAR" quote="'"/>
+		<type label="Text" length="0" sql="MEDIUMTEXT" re="TEXT" quote="'"/>
+		<type label="Binary" length="1" sql="BINARY" quote="'"/>
+		<type label="Varbinary" length="1" sql="VARBINARY" quote="'"/>
+		<type label="BLOB" length="0" sql="BLOB" re="BLOB" quote="'"/>
+	</group>
+
+	<group label="Date &amp; Time" color="rgb(200,255,200)">
+		<type label="Date" length="0" sql="DATE" quote="'"/>
+		<type label="Time" length="0" sql="TIME" quote="'"/>
+		<type label="Datetime" length="0" sql="DATETIME" quote="'"/>
+		<type label="Year" length="0" sql="YEAR" quote=""/>
+		<type label="Timestamp" length="0" sql="TIMESTAMP" quote="'"/>
+	</group>
+	
+	<group label="Miscellaneous" color="rgb(200,200,255)">
+		<type label="ENUM" length="1" sql="ENUM" quote=""/>
+		<type label="SET" length="1" sql="SET" quote=""/>
+		<type label="Bit" length="0" sql="bit" quote=""/>
+	</group>
+</datatypes><table x="772" y="523" name="users">
+<row name="user_id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default><comment>ユーザーID</comment>
+</row>
+<row name="user_email" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>NULL</default><comment>ユーザーメールアドレス</comment>
+</row>
+<row name="user_password" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>NULL</default><comment>ユーザーパスワード</comment>
+</row>
+<row name="password_salt" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>NULL</default><comment>パスワードソルト</comment>
+</row>
+<row name="is_active" null="1" autoincrement="0">
+<datatype>bit</datatype>
+<default>NULL</default><comment>有効化フラグ</comment>
+</row>
+<row name="active_token" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>NULL</default><comment>有効化コード</comment>
+</row>
+<row name="active_token_expair" null="1" autoincrement="0">
+<datatype>DATETIME</datatype>
+<default>NULL</default><comment>有効化コード期限</comment>
+</row>
+<row name="user_name" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>NULL</default><comment>ユーザー名</comment>
+</row>
+<row name="user_icon_path" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>NULL</default><comment>ユーザーアイコンパス</comment>
+</row>
+<row name="created_at" null="1" autoincrement="0">
+<datatype>DATETIME</datatype>
+<default>NULL</default><comment>作成日時</comment>
+</row>
+<row name="updated_at" null="1" autoincrement="0">
+<datatype>DATETIME</datatype>
+<default>NULL</default><comment>更新日時</comment>
+</row>
+<key type="PRIMARY" name="">
+<part>user_id</part>
+</key>
+<comment>ユーザー</comment>
+</table>
+<table x="703" y="241" name="projects">
+<row name="project_id" null="1" autoincrement="0">
+<datatype>VARCHAR(25)</datatype>
+<default>NULL</default><comment>プロジェクトID</comment>
+</row>
+<row name="project_name" null="1" autoincrement="0">
+<datatype>VARCHAR(25)</datatype>
+<default>NULL</default><comment>プロジェクト名</comment>
+</row>
+<row name="project_icon_path" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>NULL</default><comment>プロジェクトアイコンパス</comment>
+</row>
+<row name="is_private" null="1" autoincrement="0">
+<datatype>bit</datatype>
+<default>NULL</default><comment>非公開フラグ</comment>
+</row>
+<row name="seacret_code" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>NULL</default><comment>認証コード</comment>
+</row>
+<row name="seacret_code_expair" null="1" autoincrement="0">
+<datatype>DATETIME</datatype>
+<default>NULL</default><comment>認証コード期限</comment>
+</row>
+<row name="created_at" null="1" autoincrement="0">
+<datatype>DATETIME</datatype>
+<default>NULL</default><comment>作成日時</comment>
+</row>
+<row name="updated_at" null="1" autoincrement="0">
+<datatype>DATETIME</datatype>
+<default>NULL</default><comment>更新日時</comment>
+</row>
+<key type="PRIMARY" name="">
+<part>project_id</part>
+</key>
+<comment>プロジェクト</comment>
+</table>
+<table x="319" y="103" name="user_projects">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="user_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="users" row="user_id" />
+</row>
+<row name="project_id" null="1" autoincrement="0">
+<datatype>VARCHAR(25)</datatype>
+<default>NULL</default><relation table="projects" row="project_id" />
+<comment>プロジェクトID</comment>
+</row>
+<row name="cretaed_at" null="1" autoincrement="0">
+<datatype>DATETIME</datatype>
+<default>NULL</default><comment>作成日時</comment>
+</row>
+<row name="updated_at" null="1" autoincrement="0">
+<datatype>DATETIME</datatype>
+<default>NULL</default><comment>更新日時</comment>
+</row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+<comment>ユーザープロジェクト</comment>
+</table>
+<table x="1424" y="525" name="infos">
+<row name="info_id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default><comment>お知らせID</comment>
+</row>
+<row name="info_title" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>NULL</default><comment>お知らせタイトル</comment>
+</row>
+<row name="info_detail" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>NULL</default><comment>お知らせ内容</comment>
+</row>
+<row name="info_post_time" null="1" autoincrement="0">
+<datatype>DATETIME</datatype>
+<default>NULL</default><comment>お知らせ投稿日時</comment>
+</row>
+<row name="author_user_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="users" row="user_id" />
+<comment>作成ユーザーID</comment>
+</row>
+<row name="created_at" null="1" autoincrement="0">
+<datatype>DATETIME</datatype>
+<default>NULL</default><comment>作成日時</comment>
+</row>
+<row name="updated_at" null="1" autoincrement="0">
+<datatype>DATETIME</datatype>
+<default>NULL</default><comment>更新日時</comment>
+</row>
+<key type="PRIMARY" name="">
+<part>info_id</part>
+</key>
+<comment>お知らせ</comment>
+</table>
+<table x="1395" y="243" name="memos">
+<row name="memo_id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default><comment>メモID</comment>
+</row>
+<row name="memo_title" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>NULL</default><comment>メモタイトル</comment>
+</row>
+<row name="memo_detail" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>NULL</default><comment>メモ内容</comment>
+</row>
+<row name="memo_icon" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>NULL</default><comment>メモアイコン</comment>
+</row>
+<row name="memo_version_time" null="1" autoincrement="0">
+<datatype>DATETIME</datatype>
+<default>NULL</default><comment>メモバージョン日時</comment>
+</row>
+<row name="author_user_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="users" row="user_id" />
+<comment>作成ユーザーID</comment>
+</row>
+<row name="created_at" null="1" autoincrement="0">
+<datatype>DATETIME</datatype>
+<default>NULL</default><comment>作成日時</comment>
+</row>
+<row name="updated_at" null="1" autoincrement="0">
+<datatype>DATETIME</datatype>
+<default>NULL</default><comment>更新日時</comment>
+</row>
+<key type="PRIMARY" name="">
+<part>memo_id</part>
+</key>
+<comment>メモ</comment>
+</table>
+<table x="1006" y="343" name="project_infos">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="project_id" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>NULL</default><relation table="projects" row="project_id" />
+<comment>プロジェクトID</comment>
+</row>
+<row name="info_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="infos" row="info_id" />
+<comment>お知らせID</comment>
+</row>
+<row name="created_at" null="1" autoincrement="0">
+<datatype>DATETIME</datatype>
+<default>NULL</default><comment>作成日時</comment>
+</row>
+<row name="updated_at" null="1" autoincrement="0">
+<datatype>DATETIME</datatype>
+<default>NULL</default><comment>更新日時</comment>
+</row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+<comment>プロジェクトお知らせ</comment>
+</table>
+<table x="1247" y="69" name="tags">
+<row name="tag_id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default><comment>タグID</comment>
+</row>
+<row name="tag_name" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>NULL</default><comment>タグ名</comment>
+</row>
+<row name="created_at" null="1" autoincrement="0">
+<datatype>DATETIME</datatype>
+<default>NULL</default><comment>作成日時</comment>
+</row>
+<row name="updated_at" null="1" autoincrement="0">
+<datatype>DATETIME</datatype>
+<default>NULL</default><comment>更新日時</comment>
+</row>
+<key type="PRIMARY" name="">
+<part>tag_id</part>
+</key>
+<comment>タグ</comment>
+</table>
+<table x="675" y="35" name="projects_tags">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="project_id" null="1" autoincrement="0">
+<datatype>VARCHAR(25)</datatype>
+<default>NULL</default><relation table="projects" row="project_id" />
+<comment>プロジェクトID</comment>
+</row>
+<row name="tag_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="tags" row="tag_id" />
+<comment>タグID</comment>
+</row>
+<row name="created_at" null="1" autoincrement="0">
+<datatype>DATETIME</datatype>
+<default>NULL</default><comment>作成日時</comment>
+</row>
+<row name="updated_at" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><comment>更新日時</comment>
+</row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+<comment>プロジェクトタグ</comment>
+</table>
+<table x="1024" y="182" name="project_memos">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="project_id" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>NULL</default><relation table="projects" row="project_id" />
+<comment>プロジェクトID</comment>
+</row>
+<row name="memo_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="memos" row="memo_id" />
+<comment>メモID</comment>
+</row>
+<row name="created_at" null="1" autoincrement="0">
+<datatype>DATETIME</datatype>
+<default>NULL</default><comment>作成日時</comment>
+</row>
+<row name="updated_at" null="1" autoincrement="0">
+<datatype>DATETIME</datatype>
+<default>NULL</default><comment>更新日時</comment>
+</row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+<comment>プロジェクトメモ</comment>
+</table>
+<table x="1061" y="828" name="infos_receives">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="info_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="infos" row="info_id" />
+<comment>お知らせID</comment>
+</row>
+<row name="receive_user_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="users" row="user_id" />
+<comment>受信者ユーザーID</comment>
+</row>
+<row name="is_read" null="1" autoincrement="0">
+<datatype>bit</datatype>
+<default>NULL</default><comment>既読フラグ</comment>
+</row>
+<row name="created_at" null="1" autoincrement="0">
+<datatype>DATETIME</datatype>
+<default>NULL</default><comment>作成日時</comment>
+</row>
+<row name="updated_at" null="1" autoincrement="0">
+<datatype>DATETIME</datatype>
+<default>NULL</default><comment>更新日時</comment>
+</row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+<comment>お知らせ受信者</comment>
+</table>
+<table x="185" y="298" name="user_passwords">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="user_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="users" row="user_id" />
+<comment>ユーザーID</comment>
+</row>
+<row name="reset_password_token" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>NULL</default><comment>パスワード再設定トークン</comment>
+</row>
+<row name="reset_password_token_expair" null="1" autoincrement="0">
+<datatype>DATETIME</datatype>
+<default>NULL</default><comment>パスワード再設定トークン期限</comment>
+</row>
+<row name="is_used" null="1" autoincrement="0">
+<datatype>bit</datatype>
+<default>NULL</default><comment>使用フラグ</comment>
+</row>
+<row name="used_at" null="1" autoincrement="0">
+<datatype>DATETIME</datatype>
+<default>NULL</default><comment>使用日時</comment>
+</row>
+<row name="created_at" null="1" autoincrement="0">
+<datatype>DATETIME</datatype>
+<default>NULL</default><comment>作成日時</comment>
+</row>
+<row name="updated_at" null="1" autoincrement="0">
+<datatype>DATETIME</datatype>
+<default>NULL</default><comment>更新日時</comment>
+</row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+<comment>ユーザーパスワード</comment>
+</table>
+<table x="149" y="553" name="project_external_links">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default><comment>ID</comment>
+</row>
+<row name="project_id" null="1" autoincrement="0">
+<datatype>VARCHAR(25)</datatype>
+<default>NULL</default><relation table="projects" row="project_id" />
+<comment>プロジェクトID</comment>
+</row>
+<row name="service_name" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>NULL</default><comment>サービス名</comment>
+</row>
+<row name="icon_path" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>NULL</default><comment>アイコンパス</comment>
+</row>
+<row name="access_url" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>NULL</default><comment>アクセスURL</comment>
+</row>
+<row name="created_at" null="1" autoincrement="0">
+<datatype>DATETIME</datatype>
+<default>NULL</default><comment>作成日時</comment>
+</row>
+<row name="updated_at" null="1" autoincrement="0">
+<datatype>DATETIME</datatype>
+<default>NULL</default><comment>更新日時</comment>
+</row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+<comment>プロジェクト外部リンク</comment>
+</table>
+<table x="528" y="615" name="store">
+<row name="store_id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default><comment>ストアID</comment>
+</row>
+<row name="name" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>NULL</default><comment>名前</comment>
+</row>
+<row name="description" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>NULL</default><comment>説明</comment>
+</row>
+<row name="iconPath" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>NULL</default><comment>アイコンパス</comment>
+</row>
+<row name="created_at" null="1" autoincrement="0">
+<datatype>DATETIME</datatype>
+<default>NULL</default><comment>作成日時</comment>
+</row>
+<row name="updated_at" null="1" autoincrement="0">
+<datatype>DATETIME</datatype>
+<default>NULL</default><comment>更新日時</comment>
+</row>
+<key type="PRIMARY" name="">
+<part>store_id</part>
+</key>
+<comment>ストア</comment>
+</table>
+<table x="289" y="789" name="user_project_stores">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="user_project_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="store_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="created_at" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="updated_at" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+<comment>ユーザープロジェクトストア</comment>
+</table>
+<table x="1435" y="776" name="storages">
+<row name="storage_id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default><comment>ストレージID</comment>
+</row>
+<row name="bucket_name" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>NULL</default><comment>バケット名</comment>
+</row>
+<row name="created_at" null="1" autoincrement="0">
+<datatype>DATETIME</datatype>
+<default>NULL</default><comment>作成日時</comment>
+</row>
+<row name="updated_at" null="1" autoincrement="0">
+<datatype>DATETIME</datatype>
+<default>NULL</default><comment>更新日時</comment>
+</row>
+<key type="PRIMARY" name="">
+<part>storage_id</part>
+</key>
+<comment>ストレージ</comment>
+</table>
+<table x="1089" y="638" name="project_storages">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="project_id" null="1" autoincrement="0">
+<datatype>VARCHAR(25)</datatype>
+<default>NULL</default><relation table="projects" row="project_id" />
+<comment>プロジェクトID</comment>
+</row>
+<row name="storage_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="storages" row="storage_id" />
+<comment>ストレージID</comment>
+</row>
+<row name="user_id" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="users" row="user_id" />
+<comment>ユーザーID</comment>
+</row>
+<row name="created_at" null="1" autoincrement="0">
+<datatype>DATETIME</datatype>
+<default>NULL</default><comment>作成日時</comment>
+</row>
+<row name="updated_at" null="1" autoincrement="0">
+<datatype>DATETIME</datatype>
+<default>NULL</default><comment>更新日時</comment>
+</row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+<comment>プロジェクトストレージ</comment>
+</table>
+</sql>

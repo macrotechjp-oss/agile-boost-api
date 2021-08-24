@@ -1,0 +1,64 @@
+version: '3'
+
+services:
+  # API
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - TZ=Asia/Tokyo
+      - DEBUG=app:*
+    tty: true
+    ports:
+      - '4200:3000'
+    volumes:
+      - ./src:/app
+    working_dir: /app
+    command: npm run dev
+    depends_on:
+      - mysql
+      - minio
+  # MySQL
+  mysql:
+    platform: linux/x86_64
+    image: mysql:5.7
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
+    environment:
+      - TZ=Asia/Tokyo
+      - MYSQL_ROOT_PASSWORD=password
+    ports:
+      - '3306:3306'
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+  # phpmyadmin
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=mysql
+      - PMA_USER=root
+      - PMA_PASSWORD=password
+    links:
+      - mysql
+    ports:
+      - 8888:80
+  # wwwsqldesigner
+  wwwsqldesigner:
+    image: denlabo/sqldesigner
+    ports:
+      - 8088:80
+    volumes:
+      - ./wwwsqldesigner/js/config.js:/var/www/html/js/config.js
+      - ./wwwsqldesigner/js/wwwsqldesigner.js:/var/www/html/js/wwwsqldesigner.js
+  # MinIO（オブジェクトストレージサーバー）
+  minio:
+    image: minio/minio:RELEASE.2021-06-09T18-51-39Z
+    ports:
+      - "9000:9000"   # API Access Point
+    volumes:
+      - ./minio/data:/data
+    command: server /data
+    environment:
+      MINIO_ACCESS_KEY: access_key
+      MINIO_SECRET_KEY: secret_key

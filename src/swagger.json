@@ -1,0 +1,984 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Agile Boost API",
+    "description": "APIドキュメンテーション"
+  },
+  "paths":{
+    "/v1/health":{
+      "get":{
+        "tags": ["v1"],
+        "summary": "疎通確認",
+        "responses": {
+          "200":{
+            "description":"成功時のレスポンス"
+          }
+        }
+      }
+    },
+    "/v1/upload":{
+      "post":{
+        "tags": ["v1"],
+        "summary": "ファイルアップロード",
+        "parameters": [
+          {
+            "name": "file",
+            "in": "formData",
+            "description": "アップロードファイル",
+            "required": true,
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200":{
+            "description":"成功時のレスポンス"
+          }
+        }
+      }
+    },
+    "/v1/auth/sign-up":{
+      "post":{
+        "tags": ["v1", "auth"],
+        "summary": "新規会員登録",
+        "parameters": [
+          {
+            "name": "userEmail",
+            "in": "formData",
+            "description": "メールアドレス",
+            "required": true,
+            "type": "string"
+          },{
+            "name": "userPassword",
+            "in": "formData",
+            "description": "パスワード",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200":{
+            "description":"成功時のレスポンス"
+          }
+        }
+      }
+    },
+    "/v1/auth/sign-in":{
+      "post":{
+        "tags": ["v1", "auth"],
+        "summary": "会員ログイン",
+        "parameters": [
+          {
+            "name": "userEmail",
+            "in": "formData",
+            "description": "メールアドレス",
+            "required": true,
+            "type": "string"
+          },{
+            "name": "userPassword",
+            "in": "formData",
+            "description": "パスワード",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200":{
+            "description":"成功時のレスポンス"
+          }
+        }
+      }
+    },
+    "/v1/auth/sign-out":{
+      "delete":{
+        "tags": ["v1", "auth"],
+        "summary": "会員ログアウト",
+        "responses": {
+          "200":{
+            "description":"成功時のレスポンス"
+          }
+        }
+      }
+    },
+    "/v1/auth/me":{
+      "get":{
+        "tags": ["v1", "auth"],
+        "summary": "ログインユーザー情報取得",
+        "responses": {
+          "200":{
+            "description":"成功時のレスポンス"
+          }
+        }
+      }
+    },
+    "/v1/auth/send-account-activation":{
+      "post":{
+        "tags": ["v1", "auth"],
+        "summary": "アカウント有効化（メール送信）",
+        "parameters": [
+          {
+            "name": "userEmail",
+            "in": "formData",
+            "description": "メールアドレス",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200":{
+            "description":"成功時のレスポンス"
+          }
+        }
+      }
+    },
+    "/v1/auth/begin-account-activation":{
+      "post":{
+        "tags": ["v1", "auth"],
+        "summary": "アカウント有効化（ユーザー情報更新）",
+        "parameters": [
+          {
+            "name": "activeTokenCode",
+            "in": "formData",
+            "description": "アカウント有効化トークン",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200":{
+            "description":"成功時のレスポンス"
+          }
+        }
+      }
+    },
+    "/v1/auth/send-password-reset":{
+      "post":{
+        "tags": ["v1", "auth"],
+        "summary": "パスワード再設定（メール送信）",
+        "parameters": [
+          {
+            "name": "userEmail",
+            "in": "formData",
+            "description": "メールアドレス",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200":{
+            "description":"成功時のレスポンス"
+          }
+        }
+      }
+    },
+    "/v1/auth/begin-password-reset":{
+      "post":{
+        "tags": ["v1","auth"],
+        "summary": "パスワード再設定（ユーザー情報更新）",
+        "parameters": [
+          {
+            "name": "resetPasswordToken",
+            "in": "formData",
+            "description": "パスワード再設定トークン",
+            "required": true,
+            "type": "string"
+          },{
+            "name": "userPassword",
+            "in": "formData",
+            "description": "パスワード",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200":{
+            "description":"成功時のレスポンス"
+          }
+        }
+      }
+    },
+    "/v1/users":{
+      "patch":{
+        "tags": ["v1", "users"],
+        "summary": "ログインユーザー詳細更新",
+        "parameters": [
+          {
+            "name": "userName",
+            "in": "formData",
+            "description": "ユーザー名",
+            "required": true,
+            "type": "string"
+          },{
+            "name": "userIconPath",
+            "in": "formData",
+            "description": "アイコンパス",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200":{
+            "description":"成功時のレスポンス"
+          }
+        }
+      },
+      "delete":{
+        "tags": ["v1", "users"],
+        "summary": "ログインユーザー詳細削除",
+        "responses": {
+          "200":{
+            "description":"成功時のレスポンス"
+          }
+        }
+      }
+    },
+    "/v1/users/projects":{
+      "get":{
+        "tags": ["v1", "users"],
+        "summary": "ログインユーザー > プロジェクト一覧取得",
+        "responses": {
+          "200":{
+            "description":"成功時のレスポンス"
+          }
+        }
+      },
+      "post":{
+        "tags": ["v1", "users"],
+        "summary": "ログインユーザー > プロジェクト追加",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "formData",
+            "description": "プロジェクトID",
+            "required": true,
+            "type": "string"
+          },{
+            "name": "seacretCode",
+            "in": "formData",
+            "description": "認証コード",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200":{
+            "description":"成功時のレスポンス"
+          }
+        }
+      }
+    },
+    "/v1/users/projects/{projectId}":{
+      "get":{
+        "tags": ["v1", "users"],
+        "summary": "【WIP】ログインユーザー > プロジェクト詳細取得",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "プロジェクトID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200":{
+            "description":"成功時のレスポンス"
+          }
+        }
+      },
+      "patch":{
+        "tags": ["v1", "users"],
+        "summary": "【WIP】ログインユーザー > プロジェクト詳細更新",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "プロジェクトID",
+            "required": true,
+            "type": "string"
+          },{
+            "name": "projectName",
+            "in": "formData",
+            "description": "プロジェクト名",
+            "required": true,
+            "type": "string"
+          },{
+            "name": "isPrivate",
+            "in": "formData",
+            "description": "非公開フラグ",
+            "required": true,
+            "type": "boolean"
+          },{
+            "name": "seacretCode",
+            "in": "formData",
+            "description": "認証コード",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200":{
+            "description":"成功時のレスポンス"
+          }
+        }
+      },
+      "delete":{
+        "tags": ["v1", "users"],
+        "summary": "ログインユーザー > プロジェクト削除",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "プロジェクトID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200":{
+            "description":"成功時のレスポンス"
+          }
+        }
+      }
+    },
+    "/v1/users/projects/{projectId}/infos":{
+      "get":{
+        "tags": ["v1", "users"],
+        "summary": "【WIP】プロジェクト > お知らせ一覧取得[受信者(ログインユーザー)]",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "プロジェクトID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200":{
+            "description":"成功時のレスポンス"
+          }
+        }
+      },
+      "post":{
+        "tags": ["v1", "users"],
+        "summary": "【WIP】プロジェクト > お知らせ作成[作成者(ログインユーザー)]",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "プロジェクトID",
+            "required": true,
+            "type": "string"
+          },{
+            "name": "infoTitle",
+            "in": "formData",
+            "description": "お知らせタイトル",
+            "required": true,
+            "type": "string"
+          },{
+            "name": "infoDetail",
+            "in": "formData",
+            "description": "お知らせ内容",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200":{
+            "description":"成功時のレスポンス"
+          }
+        }
+      }
+    },
+    "/v1/users/projects/{projectId}/infos/{infoId}":{
+      "delete":{
+        "tags": ["v1", "users"],
+        "summary": "プロジェクト > お知らせ削除[作成者(ログインユーザー)]",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "プロジェクトID",
+            "required": true,
+            "type": "string"
+          },{
+            "name": "infoId",
+            "in": "path",
+            "description": "お知らせID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200":{
+            "description":"成功時のレスポンス"
+          }
+        }
+      }
+    },
+    "/v1/users/projects/{projectId}/memos":{
+      "get":{
+        "tags": ["v1", "users"],
+        "summary": "ログインユーザー > プロジェクト > メモ一覧取得",
+        "description": "内容",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "プロジェクトID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200":{
+            "description":"成功時のレスポンス"
+          }
+        }
+      },
+      "post":{
+        "tags": ["v1", "users"],
+        "summary": "ログインユーザー > プロジェクト > メモ追加",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "プロジェクトID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200":{
+            "description":"成功時のレスポンス"
+          }
+        }
+      }
+    },
+    "/v1/users/projects/{projectId}/memos/{memoId}":{
+      "get":{
+        "tags": ["v1", "users"],
+        "summary": "【WIP】ログインユーザー > プロジェクト > メモ詳細取得",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "プロジェクトID",
+            "required": true,
+            "type": "string"
+          },{
+            "name": "memoId",
+            "in": "path",
+            "description": "メモID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200":{
+            "description":"成功時のレスポンス"
+          }
+        }
+      },
+      "patch":{
+        "tags": ["v1", "users"],
+        "summary": "ログインユーザー > プロジェクト > メモ詳細更新",
+        "description": "内容",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "プロジェクトID",
+            "required": true,
+            "type": "string"
+          },{
+            "name": "memoId",
+            "in": "path",
+            "description": "メモID",
+            "required": true,
+            "type": "string"
+          },{
+            "name": "memoTitle",
+            "in": "formData",
+            "description": "メモタイトル",
+            "type": "string"
+          },{
+            "name": "memoDetail",
+            "in": "formData",
+            "description": "メモ内容",
+            "type": "string"
+          },{
+            "name": "memoIcon",
+            "in": "formData",
+            "description": "メモアイコン",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200":{
+            "description":"成功時のレスポンス"
+          }
+        }
+      },
+      "delete":{
+        "tags": ["v1", "users"],
+        "summary": "ログインユーザー > プロジェクト > メモ詳細削除",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "プロジェクトID",
+            "required": true,
+            "type": "string"
+          },{
+            "name": "memoId",
+            "in": "path",
+            "description": "メモID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200":{
+            "description":"成功時のレスポンス"
+          }
+        }
+      }
+    },
+    "/v1/users/projects/{projectId}/stores":{
+      "get":{
+        "tags": ["v1", "users"],
+        "summary": "ログインユーザー > プロジェクト > ストア一覧取得",
+        "description": "内容",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "プロジェクトID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200":{
+            "description":"成功時のレスポンス"
+          }
+        }
+      },
+      "post":{
+        "tags": ["v1", "users"],
+        "summary": "ログインユーザー > プロジェクト > ストア追加",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "プロジェクトID",
+            "required": true,
+            "type": "string"
+          },{
+            "name": "storeId",
+            "in": "formData",
+            "description": "ストアID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200":{
+            "description":"成功時のレスポンス"
+          }
+        }
+      }
+    },
+    "/v1/users/projects/{projectId}/stores/{storeId}":{
+      "delete":{
+        "tags": ["v1", "users"],
+        "summary": "ログインユーザー > プロジェクト > ストア削除",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "プロジェクトID",
+            "required": true,
+            "type": "string"
+          },{
+            "name": "storeId",
+            "in": "path",
+            "description": "ストアID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200":{
+            "description":"成功時のレスポンス"
+          }
+        }
+      }
+    },
+    "/v1/users/projects/{projectId}/storages":{
+      "get":{
+        "tags": ["v1", "users"],
+        "summary": "ログインユーザー > プロジェクト > ストレージ取得",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "プロジェクトID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200":{
+            "description":"成功時のレスポンス"
+          }
+        }
+      },
+      "post":{
+        "tags": ["v1", "users"],
+        "summary": "ログインユーザー > プロジェクト > ストレージ追加",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "プロジェクトID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200":{
+            "description":"成功時のレスポンス"
+          }
+        }
+      }
+    },
+    "/v1/users/projects/{projectId}/storages/{storageId}/objects":{
+      "get":{
+        "tags": ["v1", "users"],
+        "summary": "ログインユーザー > プロジェクト > ストレージ[Bucket] > オブジェクト一覧取得",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "プロジェクトID",
+            "required": true,
+            "type": "string"
+          },{
+            "name": "storageId",
+            "in": "path",
+            "description": "ストレージID",
+            "required": true,
+            "type": "string"
+          },{
+            "name": "currentPath",
+            "in": "query",
+            "description": "カレントパス",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200":{
+            "description":"成功時のレスポンス"
+          }
+        }
+      },
+      "post":{
+        "tags": ["v1", "users"],
+        "summary": "ログインユーザー > プロジェクト > ストレージ[Bucket] > オブジェクト追加[フォルダ/ファイル]",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "プロジェクトID",
+            "required": true,
+            "type": "string"
+          },{
+            "name": "storageId",
+            "in": "path",
+            "description": "ストレージID",
+            "required": true,
+            "type": "string"
+          },{
+            "name": "file",
+            "in": "formData",
+            "description": "ファイル",
+            "type": "file"
+          },{
+            "name": "currentPath",
+            "in": "formData",
+            "description": "カレントパス",
+            "type": "string"
+          },{
+            "name": "uploadType",
+            "in": "formData",
+            "description": "アップロードタイプ",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200":{
+            "description":"成功時のレスポンス"
+          }
+        }
+      }
+    },
+    "/v1/users/projects/{projectId}/storages/{storageId}/objects/{objectName}":{
+      "get":{
+        "tags": ["v1", "users"],
+        "summary": "ログインユーザー > プロジェクト > ストレージ[Bucket] > オブジェクトダウンロード",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "プロジェクトID",
+            "required": true,
+            "type": "string"
+          },{
+            "name": "storageId",
+            "in": "path",
+            "description": "ストレージID",
+            "required": true,
+            "type": "string"
+          },{
+            "name": "objectName",
+            "in": "path",
+            "description": "オブジェクト名(エンコード済)",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200":{
+            "description":"成功時のレスポンス"
+          }
+        }
+      },
+      "delete":{
+        "tags": ["v1", "users"],
+        "summary": "ログインユーザー > プロジェクト > ストレージ[Bucket] > オブジェクト削除",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "プロジェクトID",
+            "required": true,
+            "type": "string"
+          },{
+            "name": "storageId",
+            "in": "path",
+            "description": "ストレージID",
+            "required": true,
+            "type": "string"
+          },{
+            "name": "objectName",
+            "in": "path",
+            "description": "オブジェクト名(エンコード済)",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200":{
+            "description":"成功時のレスポンス"
+          }
+        }
+      }
+    },
+    "/v1/projects":{
+      "get":{
+        "tags": ["v1", "projects"],
+        "summary": "プロジェクト一覧取得",
+        "responses": {
+          "200":{
+            "description":"成功時のレスポンス"
+          }
+        }
+      }
+    },
+    "/v1/projects/{projectId}":{
+      "get":{
+        "tags": ["v1", "projects"],
+        "summary": "プロジェクト詳細取得",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "プロジェクトID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200":{
+            "description":"成功時のレスポンス"
+          }
+        }
+      },
+      "patch":{
+        "tags": ["v1", "projects"],
+        "summary": "プロジェクト詳細更新",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "プロジェクトID",
+            "required": true,
+            "type": "string"
+          },{
+            "name": "projectName",
+            "in": "formData",
+            "description": "プロジェクト名",
+            "required": true,
+            "type": "string"
+          },{
+            "name": "isPrivate",
+            "in": "formData",
+            "description": "非公開フラグ",
+            "required": true,
+            "type": "boolean"
+          },{
+            "name": "seacretCode",
+            "in": "formData",
+            "description": "認証コード",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200":{
+            "description":"成功時のレスポンス"
+          }
+        }
+      }
+    },
+    "/v1/projects/{projectId}/external-links":{
+      "get":{
+        "tags": ["v1", "projects"],
+        "summary": "プロジェクト > 外部リンク一覧取得",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "プロジェクトID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200":{
+            "description":"成功時のレスポンス"
+          }
+        }
+      },
+      "post":{
+        "tags": ["v1", "projects"],
+        "summary": "プロジェクト > 外部リンク追加",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "プロジェクトID",
+            "required": true,
+            "type": "string"
+          },{
+            "name": "serviceName",
+            "in": "formData",
+            "description": "サービス名",
+            "required": true,
+            "type": "string"
+          },{
+            "name": "iconPath",
+            "in": "formData",
+            "description": "アイコンパス",
+            "required": true,
+            "type": "string"
+          },{
+            "name": "accessUrl",
+            "in": "formData",
+            "description": "アクセスURL",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200":{
+            "description":"成功時のレスポンス"
+          }
+        }
+      }
+    },
+    "/v1/projects/{projectId}/users":{
+      "get":{
+        "tags": ["v1", "projects"],
+        "summary": "プロジェクト > ユーザー一覧取得",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "プロジェクトID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200":{
+            "description":"成功時のレスポンス"
+          }
+        }
+      }
+    },
+    "/v1/projects/{projectId}/tags":{
+      "get":{
+        "tags": ["v1", "projects"],
+        "summary": "プロジェクト > タグ一覧取得",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "プロジェクトID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200":{
+            "description":"成功時のレスポンス"
+          }
+        }
+      }
+    },
+    "/v1/stores":{
+      "get":{
+        "tags": ["v1", "stores"],
+        "summary": "ストア一覧取得",
+        "responses": {
+          "200":{
+            "description":"成功時のレスポンス"
+          }
+        }
+      }
+    }
+  },
+  "host": "localhost:4200",
+  "basePath": "/api",
+  "schemes": ["http", "https", "ws", "wss"],
+  "tags": [
+    {
+      "name": "v1",
+      "description": "バージョン1"
+    },{
+      "name": "auth",
+      "description": "認証"
+    },{
+      "name": "users",
+      "description": "ユーザー"
+    },{
+      "name": "projects",
+      "description": "プロジェクト"
+    },{
+      "name": "stores",
+      "description": "ストア"
+    }
+  ]
+}

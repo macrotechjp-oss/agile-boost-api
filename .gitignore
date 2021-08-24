@@ -1,0 +1,34 @@
+## Common
+
+## minio
+minio/*
+
+## mysql
+mysql/*
+
+## express
+# OS X
+src/.DS_Store*
+src/Icon?
+src/._*
+# Windows
+src/Thumbs.db
+src/ehthumbs.db
+src/Desktop.ini
+# Linux
+src/.directory
+src/*~
+# npm
+src/node_modules
+src/package-lock.json
+src/*.log
+src/*.gz
+# Coveralls
+src/coverage
+# Benchmarking
+src/benchmarks/graphs
+# Customize
+src/uploads/*
+!src/uploads/.keep
+
+

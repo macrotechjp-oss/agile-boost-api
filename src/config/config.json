@@ -1,0 +1,56 @@
+{
+  "development": {
+    "username": "root",
+    "password": "password",
+    "database": "agile_boost_development",
+    "host": "mysql",
+    "port": 3306,
+    "dialect": "mysql",
+    "appConf": {
+      "clientHost": "http://localhost:3000/",
+      "mail": {
+        "service_name": "Gmail",
+        "user": {
+          "email": "XXXXXXXXXXXXXXXXXX",
+          "password": "XXXXXXXXXXXXXX"
+        }
+      }
+    }
+  },
+  "test": {
+    "username": "root",
+    "password": "password",
+    "database": "agile_boost_test",
+    "host": "mysql",
+    "port": 3306,
+    "dialect": "mysql",
+    "appConf": {
+      "clientHost": "http://localhost:3000/",
+      "mail": {
+        "service_name": "Gmail",
+        "user": {
+          "email": "XXXXXXXXXXXXXXXXXX",
+          "password": "XXXXXXXXXXXXXX"
+        }
+      }
+    }
+  },
+  "production": {
+    "username": "root",
+    "password": "password",
+    "database": "agile_boost_production",
+    "host": "127.0.0.1",
+    "port": 3306,
+    "dialect": "mysql",
+    "appConf": {
+      "clientHost": "XXXXXXXXXXXXXXXXXX",
+      "mail": {
+        "service_name": "Gmail",
+        "user": {
+          "email": "XXXXXXXXXXXXXXXXXX",
+          "password": "XXXXXXXXXXXXXXXXXXXXXXXXXXX"
+        }
+      }
+    }
+  }
+}
